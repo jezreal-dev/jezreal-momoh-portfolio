@@ -1,0 +1,19 @@
+Year,Month,Channel,Impressions,CTR,Clicks,Conversions,ConversionRate
+Year 1,January,LinkedIn,25000,0.035,875,18,0.02
+Year 1,February,LinkedIn,28000,0.038,1064,22,0.02
+Year 1,March,LinkedIn,31000,0.041,1271,28,0.022
+Year 2,January,LinkedIn,65000,0.045,2925,73,0.025
+Year 2,February,LinkedIn,72000,0.048,3456,93,0.027
+Year 2,March,LinkedIn,80000,0.052,4160,120,0.029
+Year 3,January,LinkedIn,150000,0.058,8700,287,0.033
+Year 3,February,LinkedIn,168000,0.061,10248,358,0.035
+Year 3,March,LinkedIn,185000,0.065,12025,445,0.037
+Year 1,January,Newsletter,5000,0.12,600,12,0.02
+Year 1,February,Newsletter,5500,0.13,715,15,0.021
+Year 1,March,Newsletter,6000,0.14,840,20,0.023
+Year 2,January,Newsletter,12000,0.16,1920,53,0.028
+Year 2,February,Newsletter,14000,0.17,2380,71,0.03
+Year 2,March,Newsletter,16000,0.19,3040,97,0.032
+Year 3,January,Newsletter,22000,0.21,4620,175,0.038
+Year 3,February,Newsletter,24000,0.22,5280,211,0.04
+Year 3,March,Newsletter,26000,0.24,6240,262,0.042

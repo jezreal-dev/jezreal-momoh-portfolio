@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunday Bake Marketing KPI Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ApexCharts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Variable Design System */
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #151c2c;
+            --bg-card-hover: #1e293b;
+            --border-color: #1e293b;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --glow-blue: rgba(59, 130, 246, 0.15);
+            --glow-cyan: rgba(6, 182, 212, 0.15);
+            --glow-green: rgba(16, 185, 129, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .header-title-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-icon {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--glow-blue);
+        }
+
+        .header-icon i {
+            color: var(--bg-main);
+            stroke-width: 2.5px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Control Panels */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .control-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        select {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 2rem 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+
+        select:hover, select:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--glow-blue);
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .kpi-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kpi-card.blue::before { background: var(--accent-blue); }
+        .kpi-card.cyan::before { background: var(--accent-cyan); }
+        .kpi-card.green::before { background: var(--accent-green); }
+
+        .kpi-card:hover::before {
+            opacity: 1;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--glow-blue);
+        }
+
+        .kpi-card.cyan:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--glow-cyan);
+        }
+
+        .kpi-card.green:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--glow-green);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .kpi-value-area {
+            margin-top: 1rem;
+        }
+
+        .kpi-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .kpi-sparkline {
+            height: 50px;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .chart-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .chart-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .chart-title i {
+            stroke-width: 2px;
+        }
+
+        /* Table Styling */
+        .table-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .table-card:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'Inter', sans-serif;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.015);
+        }
+
+        .numeric-cell {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-title-area">
+                <div class="header-icon">
+                    <i data-lucide="bar-chart-3"></i>
+                </div>
+                <div>
+                    <h1>Sunday Bake Analytics</h1>
+                    <p>Interactive Marketing KPI Performance Platform</p>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="control-group">
+                    <label class="control-label" for="channelFilter">Channel</label>
+                    <select id="channelFilter">
+                        <option value="All">All Channels</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Newsletter">Newsletter</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="yearFilter">Timeline</label>
+                    <select id="yearFilter">
+                        <option value="All">All Years</option>
+                        <option value="Year 1">Year 1</option>
+                        <option value="Year 2">Year 2</option>
+                        <option value="Year 3">Year 3</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- KPI Cards Grid -->
+        <div class="kpi-grid">
+            <!-- Impressions -->
+            <div class="kpi-card blue" id="impressionsCard">
+                <div class="kpi-header">
+                    <span>IMPRESSIONS</span>
+                    <i data-lucide="eye" style="color: var(--accent-blue)"></i>
+                </div>
+                <div class="kpi-value-area">
+                    <div class="kpi-value" id="kpiImpressions">0</div>
+                    <div class="kpi-label">Total views across channels</div>
+                </div>
+                <div class="kpi-sparkline" id="sparklineImpressions"></div>
+            </div>
+            <!-- Clicks -->
+            <div class="kpi-card cyan" id="clicksCard">
+                <div class="kpi-header">
+                    <span>CLICKS</span>
+                    <i data-lucide="mouse-pointer" style="color: var(--accent-cyan)"></i>
+                </div>
+                <div class="kpi-value-area">
+                    <div class="kpi-value" id="kpiClicks">0</div>
+                    <div class="kpi-label">Total website click-throughs</div>
+                </div>
+                <div class="kpi-sparkline" id="sparklineClicks"></div>
+            </div>
+            <!-- CTR -->
+            <div class="kpi-card cyan" id="ctrCard">
+                <div class="kpi-header">
+                    <span>CLICK-THROUGH RATE (CTR)</span>
+                    <i data-lucide="percent" style="color: var(--accent-cyan)"></i>
+                </div>
+                <div class="kpi-value-area">
+                    <div class="kpi-value" id="kpiCTR">0.00%</div>
+                    <div class="kpi-label">Averaged Click-Through efficiency</div>
+                </div>
+                <div class="kpi-sparkline" id="sparklineCTR"></div>
+            </div>
+            <!-- Conversions -->
+            <div class="kpi-card green" id="conversionsCard">
+                <div class="kpi-header">
+                    <span>CONVERSIONS</span>
+                    <i data-lucide="check-circle" style="color: var(--accent-green)"></i>
+                </div>
+                <div class="kpi-value-area">
+                    <div class="kpi-value" id="kpiConversions">0</div>
+                    <div class="kpi-label">Actionable student/consulting leads</div>
+                </div>
+                <div class="kpi-sparkline" id="sparklineConversions"></div>
+            </div>
+            <!-- CVR -->
+            <div class="kpi-card green" id="cvrCard">
+                <div class="kpi-header">
+                    <span>CONVERSION RATE (CVR)</span>
+                    <i data-lucide="trending-up" style="color: var(--accent-green)"></i>
+                </div>
+                <div class="kpi-value-area">
+                    <div class="kpi-value" id="kpiCVR">0.00%</div>
+                    <div class="kpi-label">Conversion rate per click</div>
+                </div>
+                <div class="kpi-sparkline" id="sparklineCVR"></div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i data-lucide="bar-chart-2" style="color: var(--accent-blue)"></i>
+                    <span>Marketing Growth Trend</span>
+                </div>
+                <div id="volumeChart"></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">
+                    <i data-lucide="pie-chart" style="color: var(--accent-cyan)"></i>
+                    <span>Channel Conversions Share</span>
+                </div>
+                <div id="shareChart"></div>
+            </div>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="table-card">
+            <div class="chart-title" style="margin-bottom: 1rem;">
+                <i data-lucide="table" style="color: var(--accent-green)"></i>
+                <span>Timeline Performance Matrix</span>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timeline</th>
+                            <th>Channel</th>
+                            <th>Impressions</th>
+                            <th>Clicks</th>
+                            <th>CTR</th>
+                            <th>Conversions</th>
+                            <th>Conversion Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody">
+                        <!-- Rendered dynamically by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Embedded raw performance data from CSV
+        const rawData = [
+            { "year": "Year 1", "month": "January", "channel": "LinkedIn", "impressions": 25000, "clicks": 875, "conversions": 18, "ctr": 0.035, "cvr": 0.02 },
+            { "year": "Year 1", "month": "February", "channel": "LinkedIn", "impressions": 28000, "clicks": 1064, "conversions": 22, "ctr": 0.038, "cvr": 0.02 },
+            { "year": "Year 1", "month": "March", "channel": "LinkedIn", "impressions": 31000, "clicks": 1271, "conversions": 28, "ctr": 0.041, "cvr": 0.022 },
+            { "year": "Year 2", "month": "January", "channel": "LinkedIn", "impressions": 65000, "clicks": 2925, "conversions": 73, "ctr": 0.045, "cvr": 0.025 },
+            { "year": "Year 2", "month": "February", "channel": "LinkedIn", "impressions": 72000, "clicks": 3456, "conversions": 93, "ctr": 0.048, "cvr": 0.027 },
+            { "year": "Year 2", "month": "March", "channel": "LinkedIn", "impressions": 80000, "clicks": 4160, "conversions": 120, "ctr": 0.052, "cvr": 0.029 },
+            { "year": "Year 3", "month": "January", "channel": "LinkedIn", "impressions": 150000, "clicks": 8700, "conversions": 287, "ctr": 0.058, "cvr": 0.033 },
+            { "year": "Year 3", "month": "February", "channel": "LinkedIn", "impressions": 168000, "clicks": 10248, "conversions": 358, "ctr": 0.061, "cvr": 0.035 },
+            { "year": "Year 3", "month": "March", "channel": "LinkedIn", "impressions": 185000, "clicks": 12025, "conversions": 445, "ctr": 0.065, "cvr": 0.037 },
+            { "year": "Year 1", "month": "January", "channel": "Newsletter", "impressions": 5000, "clicks": 600, "conversions": 12, "ctr": 0.12, "cvr": 0.02 },
+            { "year": "Year 1", "month": "February", "channel": "Newsletter", "impressions": 5500, "clicks": 715, "conversions": 15, "ctr": 0.13, "cvr": 0.021 },
+            { "year": "Year 1", "month": "March", "channel": "Newsletter", "impressions": 6000, "clicks": 840, "conversions": 20, "ctr": 0.14, "cvr": 0.023 },
+            { "year": "Year 2", "month": "January", "channel": "Newsletter", "impressions": 12000, "clicks": 1920, "conversions": 53, "ctr": 0.16, "cvr": 0.028 },
+            { "year": "Year 2", "month": "February", "channel": "Newsletter", "impressions": 14000, "clicks": 2380, "conversions": 71, "ctr": 0.17, "cvr": 0.03 },
+            { "year": "Year 2", "month": "March", "channel": "Newsletter", "impressions": 16000, "clicks": 3040, "conversions": 97, "ctr": 0.19, "cvr": 0.032 },
+            { "year": "Year 3", "month": "January", "channel": "Newsletter", "impressions": 22000, "clicks": 4620, "conversions": 175, "ctr": 0.21, "cvr": 0.038 },
+            { "year": "Year 3", "month": "February", "channel": "Newsletter", "impressions": 24000, "clicks": 5280, "conversions": 211, "ctr": 0.22, "cvr": 0.04 },
+            { "year": "Year 3", "month": "March", "channel": "Newsletter", "impressions": 26000, "clicks": 6240, "conversions": 262, "ctr": 0.24, "cvr": 0.042 }
+        ];
+
+        // Format Helpers
+        const formatNum = val => new Intl.NumberFormat().format(val);
+        const formatPct = val => (val * 100).toFixed(2) + '%';
+        const monthOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // Selectors
+        const channelSelect = document.getElementById('channelFilter');
+        const yearSelect = document.getElementById('yearFilter');
+        const viewToggle = document.getElementById('viewToggle');
+
+        // Chart Global Configuration
+        const chartThemeOptions = {
+            theme: { mode: 'dark' },
+            chart: {
+                foreColor: '#94a3b8',
+                background: 'transparent',
+                toolbar: { show: false }
+            },
+            grid: {
+                borderColor: '#1e293b',
+                strokeDashArray: 4
+            }
+        };
+
+        // Instances
+        let mainChart = null;
+        let shareChart = null;
+        let sparkImp = null, sparkClk = null, sparkCtr = null, sparkConv = null, sparkCvr = null;
+
+        // Active State
+        let activeView = 'volume'; // 'volume' or 'rates'
+
+        function getSortedTimeline(filteredData) {
+            const map = {};
+            filteredData.forEach(item => {
+                const key = `${item.year} ${item.month}`;
+                if (!map[key]) {
+                    map[key] = {
+                        year: item.year,
+                        month: item.month,
+                        impressions: 0,
+                        clicks: 0,
+                        conversions: 0
+                    };
+                }
+                map[key].impressions += item.impressions;
+                map[key].clicks += item.clicks;
+                map[key].conversions += item.conversions;
+            });
+
+            return Object.keys(map).sort((a, b) => {
+                const parseKey = k => {
+                    const parts = k.split(' ');
+                    const yearNum = parseInt(parts[1]);
+                    const monthIdx = monthOrder.indexOf(parts[2]);
+                    return yearNum * 100 + monthIdx;
+                };
+                return parseKey(a) - parseKey(b);
+            }).map(key => {
+                const d = map[key];
+                const ctr = d.impressions > 0 ? (d.clicks / d.impressions) : 0;
+                const cvr = d.clicks > 0 ? (d.conversions / d.clicks) : 0;
+                return {
+                    label: key,
+                    shortLabel: key.replace("Year ", "Y"),
+                    impressions: d.impressions,
+                    clicks: d.clicks,
+                    conversions: d.conversions,
+                    ctr: ctr,
+                    cvr: cvr
+                };
+            });
+        }
+
+        function filterAndCalculate() {
+            const channel = channelSelect.value;
+            const year = yearSelect.value;
+
+            // 1. Filter rows
+            const filtered = rawData.filter(row => {
+                const matchChan = channel === 'All' || row.channel === channel;
+                const matchYear = year === 'All' || row.year === year;
+                return matchChan && matchYear;
+            });
+
+            // 2. Calculate KPI aggregates
+            const totalImp = filtered.reduce((sum, r) => sum + r.impressions, 0);
+            const totalClicks = filtered.reduce((sum, r) => sum + r.clicks, 0);
+            const totalConv = filtered.reduce((sum, r) => sum + r.conversions, 0);
+            const avgCTR = totalImp > 0 ? (totalClicks / totalImp) : 0;
+            const avgCVR = totalClicks > 0 ? (totalConv / totalClicks) : 0;
+
+            // 3. Update DOM text
+            document.getElementById('kpiImpressions').innerText = formatNum(totalImp);
+            document.getElementById('kpiClicks').innerText = formatNum(totalClicks);
+            document.getElementById('kpiCTR').innerText = formatPct(avgCTR);
+            document.getElementById('kpiConversions').innerText = formatNum(totalConv);
+            document.getElementById('kpiCVR').innerText = formatPct(avgCVR);
+
+            // 4. Update dynamic table content
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = '';
+            filtered.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.year} ${row.month}</td>
+                    <td><span style="color: ${row.channel === 'LinkedIn' ? 'var(--accent-blue)' : 'var(--accent-cyan)'}">${row.channel}</span></td>
+                    <td class="numeric-cell">${formatNum(row.impressions)}</td>
+                    <td class="numeric-cell">${formatNum(row.clicks)}</td>
+                    <td class="numeric-cell">${formatPct(row.ctr)}</td>
+                    <td class="numeric-cell">${formatNum(row.conversions)}</td>
+                    <td class="numeric-cell">${formatPct(row.cvr)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // 5. Build Sorted Timeline metrics for charts
+            const timeline = getSortedTimeline(filtered);
+            renderCharts(timeline, filtered);
+        }
+
+        function renderCharts(timeline, filteredData) {
+            const labels = timeline.map(t => t.shortLabel);
+            
+            // Sparklines Data
+            const impressionsArr = timeline.map(t => t.impressions);
+            const clicksArr = timeline.map(t => t.clicks);
+            const conversionsArr = timeline.map(t => t.conversions);
+            const ctrArr = timeline.map(t => (t.ctr * 100).toFixed(2));
+            const cvrArr = timeline.map(t => (t.cvr * 100).toFixed(2));
+
+            // Helper to render/update sparkline charts
+            function updateSpark(selector, data, color, instanceRef) {
+                const opts = {
+                    chart: { type: 'area', height: 50, sparkline: { enabled: true } },
+                    series: [{ data: data }],
+                    colors: [color],
+                    stroke: { width: 1.5, curve: 'smooth' },
+                    fill: {
+                        type: 'gradient',
+                        gradient: { shadeIntensity: 1, opacityFrom: 0.2, opacityTo: 0.02 }
+                    },
+                    tooltip: { fixed: { enabled: false }, x: { show: false }, y: { title: { formatter: () => '' } } }
+                };
+
+                if (instanceRef) {
+                    instanceRef.updateSeries([{ data: data }]);
+                    return instanceRef;
+                } else {
+                    const inst = new ApexCharts(document.querySelector(selector), opts);
+                    inst.render();
+                    return inst;
+                }
+            }
+
+            sparkImp = updateSpark("#sparklineImpressions", impressionsArr, '#3b82f6', sparkImp);
+            sparkClk = updateSpark("#sparklineClicks", clicksArr, '#06b6d4', sparkClk);
+            sparkCtr = updateSpark("#sparklineCTR", ctrArr, '#06b6d4', sparkCtr);
+            sparkConv = updateSpark("#sparklineConversions", conversionsArr, '#10b981', sparkConv);
+            sparkCvr = updateSpark("#sparklineCVR", cvrArr, '#10b981', sparkCvr);
+
+            // Render/Update Main Chart
+            let mainSeries = [];
+            let mainYAxis = [];
+            let mainColors = [];
+
+            if (activeView === 'volume') {
+                mainSeries = [
+                    { name: 'Impressions', type: 'area', data: impressionsArr },
+                    { name: 'Clicks', type: 'line', data: clicksArr },
+                    { name: 'Conversions', type: 'line', data: conversionsArr }
+                ];
+                mainColors = ['#3b82f6', '#06b6d4', '#10b981'];
+                mainYAxis = [
+                    {
+                        title: { text: 'Impressions', style: { color: '#3b82f6', fontFamily: 'Outfit' } },
+                        labels: { style: { colors: '#3b82f6' } }
+                    },
+                    {
+                        opposite: true,
+                        title: { text: 'Clicks & Conversions', style: { color: '#06b6d4', fontFamily: 'Outfit' } },
+                        labels: { style: { colors: '#06b6d4' } }
+                    }
+                ];
+            } else {
+                mainSeries = [
+                    { name: 'Click-Through Rate (CTR)', type: 'line', data: ctrArr },
+                    { name: 'Conversion Rate (CVR)', type: 'line', data: cvrArr }
+                ];
+                mainColors = ['#06b6d4', '#10b981'];
+                mainYAxis = {
+                    title: { text: 'Rates (%)', style: { color: '#f8fafc', fontFamily: 'Outfit' } },
+                    labels: {
+                        formatter: val => val + '%',
+                        style: { colors: '#f8fafc' }
+                    }
+                };
+            }
+
+            const mainOptions = {
+                ...chartThemeOptions,
+                chart: {
+                    ...chartThemeOptions.chart,
+                    height: 350,
+                    type: 'line',
+                },
+                stroke: { width: [2.5, 2.5, 2.5], curve: 'smooth' },
+                colors: mainColors,
+                series: mainSeries,
+                xaxis: { categories: labels },
+                yaxis: mainYAxis,
+                fill: {
+                    type: 'gradient',
+                    gradient: { shadeIntensity: 1, opacityFrom: 0.35, opacityTo: 0.05, stops: [0, 90, 100] }
+                },
+                tooltip: { shared: true, intersect: false, y: { formatter: (y, { seriesIndex }) => {
+                    if (typeof y !== "undefined") {
+                        return activeView === 'rates' ? y + '%' : formatNum(y);
+                    }
+                    return y;
+                }}}
+            };
+
+            if (mainChart) {
+                mainChart.updateOptions(mainOptions);
+            } else {
+                mainChart = new ApexCharts(document.querySelector("#volumeChart"), mainOptions);
+                mainChart.render();
+            }
+
+            // Render/Update Share (Donut) Chart
+            const liMatches = filteredData.filter(r => r.channel === 'LinkedIn');
+            const nsMatches = filteredData.filter(r => r.channel === 'Newsletter');
+            const totalLiConvs = liMatches.reduce((sum, r) => sum + r.conversions, 0);
+            const totalNsConvs = nsMatches.reduce((sum, r) => sum + r.conversions, 0);
+
+            const shareOptions = {
+                ...chartThemeOptions,
+                chart: { ...chartThemeOptions.chart, type: 'donut', height: 320 },
+                labels: ['LinkedIn', 'Newsletter'],
+                series: [totalLiConvs, totalNsConvs],
+                colors: ['#3b82f6', '#06b6d4'],
+                responsive: [{ breakpoint: 480, options: { chart: { width: 200 } } }],
+                legend: { position: 'bottom', fontFamily: 'Outfit', fontWeight: 500 }
+            };
+
+            if (shareChart) {
+                shareChart.updateOptions(shareOptions);
+            } else {
+                shareChart = new ApexCharts(document.querySelector("#shareChart"), shareOptions);
+                shareChart.render();
+            }
+        }
+
+        // Add Toggle functionality in JavaScript/HTML UI if needed
+        // Let's create tab selector UI inside the Main Chart Card dynamically
+        const chartCard = document.querySelector('.chart-card');
+        const titleArea = chartCard.querySelector('.chart-title');
+        
+        // Let's inject tab buttons inside the titleArea
+        const tabContainer = document.createElement('div');
+        tabContainer.style.marginLeft = 'auto';
+        tabContainer.style.display = 'flex';
+        tabContainer.style.gap = '0.5rem';
+        
+        const btnStyle = `
+            background-color: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        `;
+        
+        const volBtn = document.createElement('button');
+        volBtn.innerText = 'Volume';
+        volBtn.style = btnStyle;
+        volBtn.style.backgroundColor = 'var(--accent-blue)';
+        volBtn.style.color = '#f8fafc';
+        
+        const rateBtn = document.createElement('button');
+        rateBtn.innerText = 'Rates (%)';
+        rateBtn.style = btnStyle;
+        
+        tabContainer.appendChild(volBtn);
+        tabContainer.appendChild(rateBtn);
+        titleArea.appendChild(tabContainer);
+        
+        volBtn.addEventListener('click', () => {
+            activeView = 'volume';
+            volBtn.style.backgroundColor = 'var(--accent-blue)';
+            volBtn.style.color = '#f8fafc';
+            rateBtn.style.backgroundColor = '#1e293b';
+            rateBtn.style.color = '#94a3b8';
+            filterAndCalculate();
+        });
+        
+        rateBtn.addEventListener('click', () => {
+            activeView = 'rates';
+            rateBtn.style.backgroundColor = 'var(--accent-blue)';
+            rateBtn.style.color = '#f8fafc';
+            volBtn.style.backgroundColor = '#1e293b';
+            volBtn.style.color = '#94a3b8';
+            filterAndCalculate();
+        });
+
+        // Event listeners for selects
+        channelSelect.addEventListener('change', filterAndCalculate);
+        yearSelect.addEventListener('change', filterAndCalculate);
+
+        // Initial load
+        filterAndCalculate();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
