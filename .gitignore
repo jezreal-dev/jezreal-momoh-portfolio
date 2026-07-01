@@ -1,0 +1,12 @@
+# Scratch files
+scratch/
+out/
+.next/
+node_modules/
+
+# Local env files
+.env*.local
+
+# System/OS files
+.DS_Store
+Thumbs.db

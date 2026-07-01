@@ -1,0 +1,123 @@
+# Review package: 0c66059..HEAD
+
+## Commits
+e53f2aa chore: scaffold Next.js project with custom Forge Tailwind tokens
+
+## Files changed
+ next.config.ts      | 10 ++++++++++
+ package.json        | 26 ++++++++++++++++++++++++++
+ src/app/globals.css | 11 +++++++++++
+ tailwind.config.ts  | 28 ++++++++++++++++++++++++++++
+ vercel.json         |  4 ++++
+ 5 files changed, 79 insertions(+)
+
+## Diff
+diff --git a/next.config.ts b/next.config.ts
+new file mode 100644
+index 0000000..00c940e
+--- /dev/null
++++ b/next.config.ts
+@@ -0,0 +1,10 @@
++import type { NextConfig } from "next";
++
++const nextConfig: NextConfig = {
++  output: "export",
++  images: {
++    unoptimized: true,
++  },
++};
++
++export default nextConfig;
+diff --git a/package.json b/package.json
+new file mode 100644
+index 0000000..ea04934
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,26 @@
++{
++  "name": "temp-next-app",
++  "version": "0.1.0",
++  "private": true,
++  "scripts": {
++    "dev": "next dev",
++    "build": "next build",
++    "start": "next start",
++    "lint": "eslint"
++  },
++  "dependencies": {
++    "next": "16.2.10",
++    "react": "19.2.4",
++    "react-dom": "19.2.4"
++  },
++  "devDependencies": {
++    "@tailwindcss/postcss": "^4",
++    "@types/node": "^20",
++    "@types/react": "^19",
++    "@types/react-dom": "^19",
++    "eslint": "^9",
++    "eslint-config-next": "16.2.10",
++    "tailwindcss": "^4",
++    "typescript": "^5"
++  }
++}
+diff --git a/src/app/globals.css b/src/app/globals.css
+new file mode 100644
+index 0000000..c3f5d9f
+--- /dev/null
++++ b/src/app/globals.css
+@@ -0,0 +1,11 @@
++@tailwind base;
++@tailwind components;
++@tailwind utilities;
++
++@layer base {
++  body {
++    background-color: #0D0D0D;
++    color: #F5F0E8;
++    font-family: var(--font-outfit), sans-serif;
++  }
++}
+diff --git a/tailwind.config.ts b/tailwind.config.ts
+new file mode 100644
+index 0000000..83da4d8
+--- /dev/null
++++ b/tailwind.config.ts
+@@ -0,0 +1,28 @@
++import type { Config } from "tailwindcss";
++
++const config: Config = {
++  content: [
++    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
++    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
++    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
++  ],
++  theme: {
++    extend: {
++      colors: {
++        forge: {
++          bg: "#0D0D0D",
++          accent: "#E8630A",
++          fg: "#F5F0E8",
++          card: "#1C2B3A",
++          amber: "#FFBE0B",
++        },
++      },
++      fontFamily: {
++        sans: ["var(--font-outfit)", "sans-serif"],
++        mono: ["var(--font-jetbrains)", "monospace"],
++      },
++    },
++  },
++  plugins: [],
++};
++export default config;
+diff --git a/vercel.json b/vercel.json
+new file mode 100644
+index 0000000..20041ca
+--- /dev/null
++++ b/vercel.json
+@@ -0,0 +1,4 @@
++{
++  "cleanUrls": true,
++  "trailingSlash": false
++}

@@ -1,0 +1,98 @@
+# Review package: 0c66059..HEAD
+
+## Commits
+e731656 fix: align Tailwind v4 configuration and update package name
+e53f2aa chore: scaffold Next.js project with custom Forge Tailwind tokens
+
+## Files changed
+ next.config.ts      | 10 ++++++++++
+ package.json        | 26 ++++++++++++++++++++++++++
+ src/app/globals.css | 20 ++++++++++++++++++++
+ vercel.json         |  4 ++++
+ 4 files changed, 60 insertions(+)
+
+## Diff
+diff --git a/next.config.ts b/next.config.ts
+new file mode 100644
+index 0000000..00c940e
+--- /dev/null
++++ b/next.config.ts
+@@ -0,0 +1,10 @@
++import type { NextConfig } from "next";
++
++const nextConfig: NextConfig = {
++  output: "export",
++  images: {
++    unoptimized: true,
++  },
++};
++
++export default nextConfig;
+diff --git a/package.json b/package.json
+new file mode 100644
+index 0000000..bf4dcbe
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,26 @@
++{
++  "name": "jezreal-momoh-brand",
++  "version": "0.1.0",
++  "private": true,
++  "scripts": {
++    "dev": "next dev",
++    "build": "next build",
++    "start": "next start",
++    "lint": "eslint"
++  },
++  "dependencies": {
++    "next": "16.2.10",
++    "react": "19.2.4",
++    "react-dom": "19.2.4"
++  },
++  "devDependencies": {
++    "@tailwindcss/postcss": "^4",
++    "@types/node": "^20",
++    "@types/react": "^19",
++    "@types/react-dom": "^19",
++    "eslint": "^9",
++    "eslint-config-next": "16.2.10",
++    "tailwindcss": "^4",
++    "typescript": "^5"
++  }
++}
+diff --git a/src/app/globals.css b/src/app/globals.css
+new file mode 100644
+index 0000000..5e6cb2b
+--- /dev/null
++++ b/src/app/globals.css
+@@ -0,0 +1,20 @@
++@import "tailwindcss";
++
++@theme {
++  --color-forge-bg: #0D0D0D;
++  --color-forge-accent: #E8630A;
++  --color-forge-fg: #F5F0E8;
++  --color-forge-card: #1C2B3A;
++  --color-forge-amber: #FFBE0B;
++
++  --font-sans: var(--font-outfit), sans-serif;
++  --font-mono: var(--font-jetbrains), monospace;
++}
++
++@layer base {
++  body {
++    background-color: var(--color-forge-bg);
++    color: var(--color-forge-fg);
++    font-family: var(--font-sans);
++  }
++}
+diff --git a/vercel.json b/vercel.json
+new file mode 100644
+index 0000000..20041ca
+--- /dev/null
++++ b/vercel.json
+@@ -0,0 +1,4 @@
++{
++  "cleanUrls": true,
++  "trailingSlash": false
++}

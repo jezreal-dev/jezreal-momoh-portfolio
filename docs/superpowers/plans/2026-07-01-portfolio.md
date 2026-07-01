@@ -4,7 +4,7 @@
 
 **Goal:** Build a bespoke, premium, single-page portfolio website for Jezreal Momoh using Next.js App Router (Static Export) and Tailwind CSS with custom Forge theme tokens.
 
-**Architecture:** A modular React single-page application where each layout component (Header, Hero, ValueRole, ProofOfWork, SkillMatrix, Newsletter, Footer) is structured in separate files. Responsive layout, sub-second page loads, semantic HTML, and structured JSON-LD metadata for search engine indexing.
+**Architecture:** A modular React single-page application where each layout component (Header, Hero, ValueRole, ProofOfWork, SkillMatrix, Newsletter, Footer) is structured in separate files. Responsive layout, sub-second page loads, semantic HTML, and structured JSON-LD metadata for search engine indexing. All website code is located in the `portfolio/` subdirectory.
 
 **Tech Stack:** Next.js, React, Tailwind CSS, TypeScript
 
@@ -25,121 +25,31 @@
 ### Task 1: Next.js Initialization & Forge Theme Config
 
 **Files:**
-- Create: `package.json`
-- Create: `tailwind.config.ts`
-- Create: `next.config.ts`
-- Create: `vercel.json`
-- Modify: `src/app/globals.css`
+- Create: `portfolio/package.json`
+- Create: `portfolio/next.config.ts`
+- Create: `portfolio/vercel.json`
+- Modify: `portfolio/src/app/globals.css`
 
 **Interfaces:**
 - Consumes: None
 - Produces: App structure and Tailwind configuration with custom Forge color variables.
 
-- [ ] **Step 1: Scaffold Next.js App in workspace root**
-
-Run command to scaffold the app. Since the directory is non-empty, we will use the non-interactive setup with defaults:
-```powershell
-npx -y create-next-app@latest ./ --typescript --tailwind --eslint --app --src-dir --use-npm --disable-git --yes
-```
-
-- [ ] **Step 2: Add static export config to next.config.ts**
-
-Open `next.config.ts` (or `next.config.js`) and modify it to:
-```typescript
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  output: "export",
-  images: {
-    unoptimized: true,
-  },
-};
-
-export default nextConfig;
-```
-
-- [ ] **Step 3: Add custom Forge color tokens to tailwind.config.ts**
-
-Modify the Tailwind configuration to define our Forge theme. Replace standard extend colors and fonts:
-```typescript
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        forge: {
-          bg: "#0D0D0D",
-          accent: "#E8630A",
-          fg: "#F5F0E8",
-          card: "#1C2B3A",
-          amber: "#FFBE0B",
-        },
-      },
-      fontFamily: {
-        sans: ["var(--font-outfit)", "sans-serif"],
-        mono: ["var(--font-jetbrains)", "monospace"],
-      },
-    },
-  },
-  plugins: [],
-};
-export default config;
-```
-
-- [ ] **Step 4: Update src/app/globals.css for theme defaults**
-
-Replace content in `src/app/globals.css`:
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    background-color: #0D0D0D;
-    color: #F5F0E8;
-    font-family: var(--font-outfit), sans-serif;
-  }
-}
-```
-
-- [ ] **Step 5: Create vercel.json for clean deployment mapping**
-
-Create `vercel.json` in the root:
-```json
-{
-  "cleanUrls": true,
-  "trailingSlash": false
-}
-```
-
-- [ ] **Step 6: Verify build executes static export**
-
-Run: `npm run build`  
-Expected: Build succeeds and generates static files under the `out` directory.
-
-- [ ] **Step 7: Commit task changes**
-
-Run:
-```powershell
-git add package.json tailwind.config.ts next.config.ts vercel.json src/app/globals.css
-git commit -m "chore: scaffold Next.js project with custom Forge Tailwind tokens"
-```
+- [x] **Step 1: Scaffold Next.js App in portfolio subdirectory** (Completed)
+- [x] **Step 2: Add static export config to next.config.ts** (Completed)
+- [x] **Step 3: Add custom Forge color tokens to globals.css @theme** (Completed)
+- [x] **Step 4: Update globals.css for theme defaults** (Completed)
+- [x] **Step 5: Create vercel.json for clean deployment mapping** (Completed)
+- [x] **Step 6: Verify build executes static export** (Completed)
+- [x] **Step 7: Commit task changes** (Completed)
 
 ---
 
 ### Task 2: Layout & Core Shell Components (Header & Footer)
 
 **Files:**
-- Modify: `src/app/layout.tsx`
-- Create: `src/components/Header.tsx`
-- Create: `src/components/Footer.tsx`
+- Modify: `portfolio/src/app/layout.tsx`
+- Create: `portfolio/src/components/Header.tsx`
+- Create: `portfolio/src/components/Footer.tsx`
 
 **Interfaces:**
 - Consumes: Custom Forge Tailwind configuration
@@ -147,7 +57,7 @@ git commit -m "chore: scaffold Next.js project with custom Forge Tailwind tokens
 
 - [ ] **Step 1: Create Header Component**
 
-Create `src/components/Header.tsx`:
+Create `portfolio/src/components/Header.tsx`:
 ```tsx
 "use client";
 
@@ -179,7 +89,7 @@ export default function Header() {
 
 - [ ] **Step 2: Create Footer Component with JSON-LD metadata**
 
-Create `src/components/Footer.tsx`:
+Create `portfolio/src/components/Footer.tsx`:
 ```tsx
 import React from "react";
 
@@ -227,7 +137,7 @@ export default function Footer() {
 
 - [ ] **Step 3: Modify Layout file to integrate Google Fonts and structure**
 
-Replace `src/app/layout.tsx` to include `Outfit` and `JetBrains_Mono` fonts:
+Replace `portfolio/src/app/layout.tsx` to include `Outfit` and `JetBrains_Mono` fonts:
 ```tsx
 import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
@@ -271,14 +181,14 @@ export default function RootLayout({
 
 - [ ] **Step 4: Verify build succeeds**
 
-Run: `npm run build`  
+Run: `npm run build` from `portfolio/` directory  
 Expected: Successful build with static assets exported.
 
 - [ ] **Step 5: Commit changes**
 
 Run:
 ```powershell
-git add src/app/layout.tsx src/components/Header.tsx src/components/Footer.tsx
+git add portfolio/src/app/layout.tsx portfolio/src/components/Header.tsx portfolio/src/components/Footer.tsx
 git commit -m "feat: add Header and Footer shell with fonts and JSON-LD schema"
 ```
 
@@ -287,10 +197,10 @@ git commit -m "feat: add Header and Footer shell with fonts and JSON-LD schema"
 ### Task 3: Hero & Value/Role Components
 
 **Files:**
-- Create: `src/components/Hero.tsx`
-- Create: `src/components/ValueRole.tsx`
-- Modify: `src/app/page.tsx`
-- Create: `public/images/headshot-placeholder.svg`
+- Create: `portfolio/src/components/Hero.tsx`
+- Create: `portfolio/src/components/ValueRole.tsx`
+- Modify: `portfolio/src/app/page.tsx`
+- Create: `portfolio/public/images/headshot-placeholder.svg`
 
 **Interfaces:**
 - Consumes: Custom Forge layout shell.
@@ -298,7 +208,7 @@ git commit -m "feat: add Header and Footer shell with fonts and JSON-LD schema"
 
 - [ ] **Step 1: Create headshot placeholder image**
 
-Create SVG asset at `public/images/headshot-placeholder.svg`:
+Create SVG asset at `portfolio/public/images/headshot-placeholder.svg`:
 ```xml
 <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="200" height="200" rx="100" fill="#1C2B3A"/>
@@ -309,7 +219,7 @@ Create SVG asset at `public/images/headshot-placeholder.svg`:
 
 - [ ] **Step 2: Create Hero Component**
 
-Create `src/components/Hero.tsx` with editorial alignment and offset border picture frame:
+Create `portfolio/src/components/Hero.tsx` with editorial alignment and offset border picture frame:
 ```tsx
 import React from "react";
 import Image from "next/image";
@@ -358,7 +268,7 @@ export default function Hero() {
 
 - [ ] **Step 3: Create Value/Role Component**
 
-Create `src/components/ValueRole.tsx` using a monospaced "Build in Public" console block:
+Create `portfolio/src/components/ValueRole.tsx` using a monospaced "Build in Public" console block:
 ```tsx
 import React from "react";
 
@@ -382,7 +292,7 @@ export default function ValueRole() {
 
 - [ ] **Step 4: Mount Hero and Value/Role to Page**
 
-Replace `src/app/page.tsx` with:
+Replace `portfolio/src/app/page.tsx` with:
 ```tsx
 import Hero from "@/components/Hero";
 import ValueRole from "@/components/ValueRole";
@@ -399,14 +309,14 @@ export default function Home() {
 
 - [ ] **Step 5: Verify build**
 
-Run: `npm run build`  
+Run: `npm run build` from `portfolio/` directory  
 Expected: Successful compilation.
 
 - [ ] **Step 6: Commit changes**
 
 Run:
 ```powershell
-git add public/images/headshot-placeholder.svg src/components/Hero.tsx src/components/ValueRole.tsx src/app/page.tsx
+git add portfolio/public/images/headshot-placeholder.svg portfolio/src/components/Hero.tsx portfolio/src/components/ValueRole.tsx portfolio/src/app/page.tsx
 git commit -m "feat: implement Hero and Value/Role components with offset styling"
 ```
 
@@ -415,9 +325,9 @@ git commit -m "feat: implement Hero and Value/Role components with offset stylin
 ### Task 4: Proof of Work & Skill Matrix Components
 
 **Files:**
-- Create: `src/components/ProofOfWork.tsx`
-- Create: `src/components/SkillMatrix.tsx`
-- Modify: `src/app/page.tsx`
+- Create: `portfolio/src/components/ProofOfWork.tsx`
+- Create: `portfolio/src/components/SkillMatrix.tsx`
+- Modify: `portfolio/src/app/page.tsx`
 
 **Interfaces:**
 - Consumes: Custom Forge layout shell.
@@ -425,7 +335,7 @@ git commit -m "feat: implement Hero and Value/Role components with offset stylin
 
 - [ ] **Step 1: Create ProofOfWork Component**
 
-Create `src/components/ProofOfWork.tsx`:
+Create `portfolio/src/components/ProofOfWork.tsx`:
 ```tsx
 import React from "react";
 
@@ -520,7 +430,7 @@ export default function ProofOfWork() {
 
 - [ ] **Step 2: Create SkillMatrix Component**
 
-Create `src/components/SkillMatrix.tsx` with dynamic connective callouts:
+Create `portfolio/src/components/SkillMatrix.tsx` with dynamic connective callouts:
 ```tsx
 import React from "react";
 
@@ -568,7 +478,7 @@ export default function SkillMatrix() {
 
 - [ ] **Step 3: Mount Components to page.tsx**
 
-Modify `src/app/page.tsx` to include `ProofOfWork` and `SkillMatrix`:
+Modify `portfolio/src/app/page.tsx` to include `ProofOfWork` and `SkillMatrix`:
 ```tsx
 import Hero from "@/components/Hero";
 import ValueRole from "@/components/ValueRole";
@@ -589,14 +499,14 @@ export default function Home() {
 
 - [ ] **Step 4: Verify build**
 
-Run: `npm run build`  
+Run: `npm run build` from `portfolio/` directory  
 Expected: Static build completes with zero linting or routing issues.
 
 - [ ] **Step 5: Commit changes**
 
 Run:
 ```powershell
-git add src/components/ProofOfWork.tsx src/components/SkillMatrix.tsx src/app/page.tsx
+git add portfolio/src/components/ProofOfWork.tsx portfolio/src/components/SkillMatrix.tsx portfolio/src/app/page.tsx
 git commit -m "feat: implement ProofOfWork and SkillMatrix components"
 ```
 
@@ -605,8 +515,8 @@ git commit -m "feat: implement ProofOfWork and SkillMatrix components"
 ### Task 5: Newsletter Component & Final Verification
 
 **Files:**
-- Create: `src/components/Newsletter.tsx`
-- Modify: `src/app/page.tsx`
+- Create: `portfolio/src/components/Newsletter.tsx`
+- Modify: `portfolio/src/app/page.tsx`
 
 **Interfaces:**
 - Consumes: Complete page wrapper.
@@ -614,7 +524,7 @@ git commit -m "feat: implement ProofOfWork and SkillMatrix components"
 
 - [ ] **Step 1: Create Newsletter Component**
 
-Create `src/components/Newsletter.tsx`:
+Create `portfolio/src/components/Newsletter.tsx`:
 ```tsx
 "use client";
 
@@ -659,7 +569,7 @@ export default function Newsletter() {
 
 - [ ] **Step 2: Mount Newsletter to page.tsx**
 
-Modify `src/app/page.tsx` to mount `Newsletter`:
+Modify `portfolio/src/app/page.tsx` to mount `Newsletter`:
 ```tsx
 import Hero from "@/components/Hero";
 import ValueRole from "@/components/ValueRole";
@@ -682,13 +592,13 @@ export default function Home() {
 
 - [ ] **Step 3: Run final production build**
 
-Run: `npm run build`  
-Expected: The export finishes successfully with output in `out/`.
+Run: `npm run build` from `portfolio/` directory  
+Expected: The export finishes successfully with output in `portfolio/out/`.
 
 - [ ] **Step 4: Commit all changes**
 
 Run:
 ```powershell
-git add src/components/Newsletter.tsx src/app/page.tsx
+git add portfolio/src/components/Newsletter.tsx portfolio/src/app/page.tsx
 git commit -m "feat: add Substack newsletter signup component"
 ```
