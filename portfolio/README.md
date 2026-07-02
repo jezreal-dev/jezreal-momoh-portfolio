@@ -1,31 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jezreal Momoh Portfolio
 
-## Getting Started
+A bespoke, premium, single-page developer portfolio website designed with editorial minimalism, semantic HTML, and high-performance engineering.
 
-First, run the development server:
+## 1. Project Overview
 
+This repository hosts the personal brand and developer portfolio of Jezreal Momoh, an AI and Software Full-Stack Engineer. The application is custom-engineered using modern web development standards to ensure fast loading times, responsive design, and search engine optimization.
+
+## 2. Design System and Aesthetics (The Forge)
+
+The user interface follows a custom-designed visual theme named "Forge," which prioritizes high-contrast editorial spacing, clean offset layouts, and readable developer typography.
+
+### Color Palette
+
+| Token Name | Hex Value | Purpose |
+|---|---|---|
+| Background | #0D0D0D | Main page background (sleek dark mode) |
+| Accent | #E8630A | Burnt orange accents for buttons, borders, and highlights |
+| Foreground | #F5F0E8 | Warm off-white text for primary reading |
+| Cards | #1C2B3A | Dark slate blue background for console cards and sections |
+| Highlight | #FFBE0B | Vibrant gold highlight accents for special highlights |
+
+### Typography
+
+1. **Headings:** Styled with the Outfit font family to provide a modern, structural look.
+2. **Monospace Elements:** Styled with the JetBrains Mono font family for terminal cards, code snippets, and structured labels.
+
+## 3. Tech Stack
+
+1. **Framework:** Next.js (App Router)
+2. **Styling:** Tailwind CSS v4 (configured via modern CSS-first theme directives)
+3. **Compiler:** Webpack (utilized to ensure local compatibility across path length restrictions)
+4. **Icons and Media:** Custom vector SVGs to maintain layout crispness on Retina displays
+
+## 4. Engineering Standards
+
+1. **Machine Experience (MX) Optimization:** Structured entirely with semantic HTML5 tags (header, main, section, footer) and JSON-LD structured schema metadata to guarantee readability for AI crawl agents, LLM parsers, and search engine bots.
+2. **Micro-Animations:** Fluid transition effects applied to interactive states, including group-hover triggers on image containers.
+3. **Encoding & Grammar Hygiene:** Zero Byte Order Marks (BOMs) in source code files, strict layout alignment, and no use of em-dashes.
+
+## 5. Local Setup and Installation
+
+Follow these instructions to run the project locally on your machine.
+
+### Installation
+
+Change directory into the portfolio folder and install the node dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd portfolio
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development Server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run the development server locally:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000 in your browser to inspect the application.
 
-To learn more about Next.js, explore the [Next.js Documentation](https://nextjs.org/docs) to learn about Next.js features and API, or try the interactive [Learn Next.js](https://nextjs.org/learn) tutorial.
+### Production Compilation
 
-You can also check out [the Next.js GitHub repository](https://github.com/vercel/next.js): your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Compile the static production package:
+```bash
+npm run build
+```
