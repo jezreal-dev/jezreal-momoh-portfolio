@@ -13,7 +13,7 @@ export default function Hero() {
             BUILDING FULL-STACK AI PRODUCTS FROM SCRATCH.
           </h1>
           <p className="mt-6 font-sans text-lg text-forge-fg/80 leading-relaxed">
-            I am Jezreal Momoh, an AI & Software Full-Stack Engineer and Cohort 1 Software Engineering Fellow at Learn2Earn NG. I build secure agentic architectures and fast, user-centric interfaces.
+             I am Jezreal Momoh, an AI & Software Full-Stack Engineer and Cohort 1 Software Engineering Fellow at Learn2Earn NG. I build secure agentic architectures and fast, user-centric interfaces.
           </p>
           <div className="mt-8 flex flex-wrap gap-4 font-mono text-sm">
             <a href="https://github.com/jezrealdev" target="_blank" rel="noopener noreferrer" className="border border-forge-accent px-5 py-2 hover:bg-forge-accent hover:text-forge-bg transition-colors">
@@ -24,8 +24,8 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <div className="relative">
-          <div className="absolute -bottom-3 -right-3 h-48 w-48 rounded-full border-2 border-forge-accent bg-transparent transition-transform duration-300 hover:translate-x-1 hover:translate-y-1" />
+        <div className="relative group">
+          <div className="absolute -bottom-3 -right-3 h-48 w-48 rounded-full border-2 border-forge-accent bg-transparent transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1" />
           <div className="relative overflow-hidden h-48 w-48 rounded-full border border-forge-fg/10 bg-forge-card flex items-center justify-center">
             <Image
               src="/images/headshot-placeholder.svg"
