@@ -26,23 +26,23 @@ export default function SkillMatrix() {
         <div className="border border-forge-fg/15 bg-forge-card p-6 rounded-lg font-mono">
           <h3 className="text-forge-fg font-bold border-b border-forge-fg/10 pb-2 mb-4 text-sm">[01. FRONTEND]</h3>
           <p className="text-xs text-forge-fg/70 leading-relaxed">
-            Next.js & React to build performant web interfaces. Focus on layout optimization, component isolation, and micro-interactions.
+            Next.js, TypeScript, & Tailwind CSS to build performant web interfaces. Experience with global state (Zustand) and WebSockets for real-time dashboards.
           </p>
         </div>
         
         {/* Backend Section */}
         <div className="border border-forge-fg/15 bg-forge-card p-6 rounded-lg font-mono">
-          <h3 className="text-forge-fg font-bold border-b border-forge-fg/10 pb-2 mb-4 text-sm">[02. BACKEND]</h3>
+          <h3 className="text-forge-fg font-bold border-b border-forge-fg/10 pb-2 mb-4 text-sm">[02. BACKEND & CLOUD]</h3>
           <p className="text-xs text-forge-fg/70 leading-relaxed">
-            Go & Python to construct low-latency JSON REST APIs and worker queues. Clean structures for database pools.
+            Go & Python for high-concurrency APIs. Serverless architecture using AWS Lambda, DynamoDB, SQS, and Supabase / PostgreSQL.
           </p>
         </div>
 
-        {/* AI & Security Section */}
+        {/* AI & Infrastructure Section */}
         <div className="border border-forge-fg/15 bg-forge-card p-6 rounded-lg font-mono">
-          <h3 className="text-forge-fg font-bold border-b border-forge-fg/10 pb-2 mb-4 text-sm">[03. AI & SECURITY]</h3>
+          <h3 className="text-forge-fg font-bold border-b border-forge-fg/10 pb-2 mb-4 text-sm">[03. AI & AGENTIC SYSTEMS]</h3>
           <p className="text-xs text-forge-fg/70 leading-relaxed">
-            RAG pipeline design, agentic validation workflows, and front-to-back security controls against payload threats.
+            Designing multi-agent orchestration pipelines (MCP, Google ADK) and integrating LLMs (Gemini AI, Amazon Bedrock) into production systems.
           </p>
         </div>
       </div>
