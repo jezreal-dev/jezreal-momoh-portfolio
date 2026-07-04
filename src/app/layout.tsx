@@ -51,6 +51,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
@@ -59,16 +61,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${jetbrains.variable} scroll-smooth`}>
+    <html lang="en" className={`${outfit.variable} ${jetbrains.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col justify-between">
-        <Header />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <ChatWidget />
-        <OnboardingTour />
-        <SpeedInsights />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Header />
+          <ThemeToggle />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+          <ChatWidget />
+          <OnboardingTour />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

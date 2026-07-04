@@ -1,11 +1,27 @@
 @import "tailwindcss";
 
+:root {
+  --forge-bg: #FAFAFA;
+  --forge-fg: #1A1A1A;
+  --forge-card: #FFFFFF;
+  --forge-accent: #E8630A;
+  --forge-amber: #FFBE0B;
+}
+
+.dark {
+  --forge-bg: #0D0D0D;
+  --forge-fg: #F5F0E8;
+  --forge-card: #1C2B3A;
+  --forge-accent: #E8630A;
+  --forge-amber: #FFBE0B;
+}
+
 @theme {
-  --color-forge-bg: #0D0D0D;
-  --color-forge-accent: #E8630A;
-  --color-forge-fg: #F5F0E8;
-  --color-forge-card: #1C2B3A;
-  --color-forge-amber: #FFBE0B;
+  --color-forge-bg: var(--forge-bg);
+  --color-forge-accent: var(--forge-accent);
+  --color-forge-fg: var(--forge-fg);
+  --color-forge-card: var(--forge-card);
+  --color-forge-amber: var(--forge-amber);
 
   --font-sans: var(--font-outfit), sans-serif;
   --font-mono: var(--font-jetbrains), monospace;
