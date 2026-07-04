@@ -36,11 +36,11 @@ export default function Newsletter() {
         <h2 className="mt-3 font-sans text-2xl md:text-3xl font-bold tracking-tight text-forge-fg">
           BUILDING IN PUBLIC NEWSLETTER
         </h2>
-        <p className="mt-4 text-sm text-forge-fg/80 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-4 text-sm text-forge-fg/80 max-w-lg mx-auto leading-relaxed">
           I write a weekly Sunday newsletter sharing raw engineering logs, lesson plans, and full-stack strategies.
         </p>
         <form
-          action="https://jezrealdev.substack.com/subscribe"
+          action="https://jezrealmomoh.substack.com/subscribe"
           method="GET"
           target="_blank"
           className="mt-8 flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto"
