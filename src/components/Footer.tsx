@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope, FaBriefcase } from "react-icons/fa6";
 /**
  * Footer Component
  * 
@@ -21,10 +21,11 @@ export default function Footer() {
     "@type": "Person",
     "name": "Jezreal Momoh",
     "jobTitle": "AI & Software Full-Stack Engineer",
-    "url": "https://jezreal.dev",
+    "url": "https://jezrealmomoh.vercel.app",
     "sameAs": [
-      "https://github.com/jezrealdev",
-      "https://linkedin.com/in/jezreal-momoh"
+      "https://github.com/jezreal-dev",
+      "https://www.linkedin.com/in/jezreal-momoh/",
+      "https://x.com/laerzej_m"
     ]
   };
 
@@ -36,12 +37,21 @@ export default function Footer() {
           &copy; {currentYear} Jezreal Momoh. All rights reserved.
         </div>
         {/* Social Links */}
-        <div className="flex gap-4">
-          <a href="https://github.com/jezrealdev" target="_blank" rel="noopener noreferrer" className="hover:text-forge-accent">
-            GitHub
+        <div className="flex gap-4 text-lg">
+          <a href="https://github.com/jezreal-dev" target="_blank" rel="noopener noreferrer" className="hover:text-forge-accent" aria-label="GitHub">
+            <FaGithub />
           </a>
-          <a href="https://linkedin.com/in/jezreal-momoh" target="_blank" rel="noopener noreferrer" className="hover:text-forge-accent">
-            LinkedIn
+          <a href="https://www.linkedin.com/in/jezreal-momoh/" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A66C2]" aria-label="LinkedIn">
+            <FaLinkedin />
+          </a>
+          <a href="https://x.com/laerzej_m" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Twitter/X">
+            <FaXTwitter />
+          </a>
+          <a href="mailto:jezreelmomoh1234@gmail.com" className="hover:text-[#EA4335]" aria-label="Personal Email">
+            <FaEnvelope />
+          </a>
+          <a href="mailto:jezreelglobal@gmail.com" className="hover:text-[#EA4335]" aria-label="Work Email">
+            <FaBriefcase />
           </a>
         </div>
         {/* MX Indicator */}
