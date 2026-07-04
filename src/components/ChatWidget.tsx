@@ -167,6 +167,7 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
+          aria-label="Toggle Chat"
           className="bg-gradient-to-br from-[#E8630A] to-[#FF8C42] hover:shadow-[0_0_30px_rgba(232,99,10,0.4)] text-white p-4 sm:p-5 rounded-full shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group ring-4 ring-[#1C2B3A]/50"
         >
           <MessageSquare size={24} className="group-hover:scale-110 transition-transform duration-300" />

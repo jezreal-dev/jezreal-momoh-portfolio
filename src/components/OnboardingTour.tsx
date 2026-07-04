@@ -69,7 +69,7 @@ export default function OnboardingTour() {
                   <div className="flex gap-4 items-start p-4 rounded-2xl bg-[#0D0D0D]/50 border border-[#F5F0E8]/5">
                     <Code className="text-[#FFBE0B] shrink-0 mt-1" size={18} />
                     <div>
-                      <h4 className="text-[#F5F0E8] font-bold text-sm">Explore My Work</h4>
+                      <h3 className="text-[#F5F0E8] font-bold text-sm">Explore My Work</h3>
                       <p className="text-[#F5F0E8]/60 text-xs mt-1 leading-relaxed">
                         Scroll down to view my featured projects, technical expertise, and my newsletter.
                       </p>
@@ -79,7 +79,7 @@ export default function OnboardingTour() {
                   <div className="flex gap-4 items-start p-4 rounded-2xl bg-[#E8630A]/10 border border-[#E8630A]/20">
                     <Terminal className="text-[#E8630A] shrink-0 mt-1" size={18} />
                     <div>
-                      <h4 className="text-[#E8630A] font-bold text-sm">Meet L2E-Shield</h4>
+                      <h3 className="text-[#E8630A] font-bold text-sm">Meet L2E-Shield</h3>
                       <p className="text-[#F5F0E8]/80 text-xs mt-1 leading-relaxed">
                         In the bottom right corner, you can chat with my personal AI assistant. Ask it about my skills, experience, or tech stack!
                       </p>
