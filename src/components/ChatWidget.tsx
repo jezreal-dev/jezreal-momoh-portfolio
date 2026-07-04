@@ -79,23 +79,35 @@ export default function ChatWidget() {
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 font-sans flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-[calc(100vw-2rem)] sm:w-96 h-[60vh] sm:h-[500px] max-h-[800px] bg-[#1C2B3A] border border-[#F5F0E8]/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right">
+        <div className="mb-4 w-[calc(100vw-2rem)] sm:w-96 h-[60vh] sm:h-[500px] max-h-[800px] bg-[#1C2B3A]/80 backdrop-blur-2xl border border-[#F5F0E8]/10 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right ring-1 ring-white/5">
           {/* Header */}
-          <div className="bg-[#0D0D0D] p-4 flex justify-between items-center border-b border-[#F5F0E8]/10 shrink-0">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#FFBE0B] rounded-full animate-pulse"></div>
-              <h3 className="text-[#F5F0E8] font-bold">Jezreal&apos;s AI Assistant</h3>
+          <div className="bg-[#0D0D0D]/40 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-[#F5F0E8]/5 shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="relative flex items-center justify-center">
+                <div className="w-2.5 h-2.5 bg-[#FFBE0B] rounded-full"></div>
+                <div className="absolute w-2.5 h-2.5 bg-[#FFBE0B] rounded-full animate-ping opacity-75"></div>
+              </div>
+              <div>
+                <h3 className="text-[#F5F0E8] font-bold text-sm">L2E-Shield</h3>
+                <p className="text-[#F5F0E8]/50 text-[10px] uppercase tracking-widest font-mono">AI Assistant</p>
+              </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-[#F5F0E8]/70 hover:text-[#FFBE0B] transition-colors p-1">
-              <X size={20} />
+            <button onClick={() => setIsOpen(false)} className="text-[#F5F0E8]/50 hover:text-[#FFBE0B] hover:bg-[#F5F0E8]/5 rounded-full p-2 transition-all">
+              <X size={18} />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-[#1C2B3A]">
+          <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-5">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${msg.role === "user" ? "bg-[#E8630A] text-[#F5F0E8] rounded-br-none" : "bg-[#0D0D0D] text-[#F5F0E8] border border-[#F5F0E8]/10 rounded-bl-none"}`}>
+                <div 
+                  className={`max-w-[85%] px-4 py-3 text-sm leading-relaxed shadow-md
+                    ${msg.role === "user" 
+                      ? "bg-gradient-to-br from-[#E8630A] to-[#FF8C42] text-white rounded-2xl rounded-tr-sm" 
+                      : "bg-[#0D0D0D]/60 backdrop-blur-md text-[#F5F0E8] border border-[#F5F0E8]/10 rounded-2xl rounded-tl-sm"
+                    }`}
+                >
                   {msg.text}
                 </div>
               </div>
@@ -103,13 +115,13 @@ export default function ChatWidget() {
 
             {/* FAQ Quick Replies */}
             {messages.length === 1 && !isLoading && (
-              <div className="flex flex-col gap-2 mt-2 items-start pl-2">
-                <p className="text-xs text-[#F5F0E8]/50 uppercase tracking-wider font-bold mb-1">Frequently Asked</p>
+              <div className="flex flex-col gap-2 mt-4 items-start animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <p className="text-[10px] text-[#F5F0E8]/40 uppercase tracking-widest font-mono mb-2 ml-1">Suggested Questions</p>
                 {["What is your tech stack?", "How did you build this site?", "What does L2E Shield do?"].map((faq, i) => (
                   <button
                     key={i}
                     onClick={() => sendMessage(faq)}
-                    className="text-xs bg-[#0D0D0D] border border-[#E8630A]/30 text-[#F5F0E8]/80 px-3 py-2 rounded-full hover:bg-[#E8630A]/20 transition-colors text-left shadow-sm"
+                    className="text-xs bg-[#0D0D0D]/40 backdrop-blur-sm border border-[#E8630A]/20 text-[#F5F0E8]/80 px-4 py-2.5 rounded-2xl hover:bg-[#E8630A]/20 hover:border-[#E8630A]/40 transition-all text-left shadow-sm hover:shadow-[#E8630A]/10 hover:-translate-y-0.5"
                   >
                     {faq}
                   </button>
@@ -119,9 +131,9 @@ export default function ChatWidget() {
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-[#0D0D0D] p-3 rounded-2xl rounded-bl-none border border-[#F5F0E8]/10 flex gap-2 items-center">
+                <div className="bg-[#0D0D0D]/60 backdrop-blur-md px-4 py-3 rounded-2xl rounded-tl-sm border border-[#F5F0E8]/10 flex gap-3 items-center shadow-md">
                   <Loader2 className="animate-spin text-[#FFBE0B]" size={16} />
-                  <span className="text-sm text-[#F5F0E8]/70">Thinking...</span>
+                  <span className="text-xs text-[#F5F0E8]/60 font-mono">Thinking...</span>
                 </div>
               </div>
             )}
@@ -129,22 +141,22 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <div className="p-3 bg-[#0D0D0D] border-t border-[#F5F0E8]/10 shrink-0">
+          <div className="p-4 bg-gradient-to-t from-[#0D0D0D]/80 to-transparent shrink-0">
             <form onSubmit={handleSend} className="flex items-center gap-2 relative">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything..."
-                className="w-full bg-[#1C2B3A] text-[#F5F0E8] placeholder:text-[#F5F0E8]/40 border border-[#F5F0E8]/10 rounded-full py-2.5 pl-4 pr-12 focus:outline-none focus:border-[#FFBE0B] text-sm transition-colors"
+                placeholder="Message L2E-Shield..."
+                className="w-full bg-[#0D0D0D]/60 backdrop-blur-xl text-[#F5F0E8] placeholder:text-[#F5F0E8]/30 border border-[#F5F0E8]/10 rounded-full py-3.5 pl-5 pr-14 focus:outline-none focus:border-[#E8630A]/50 focus:ring-1 focus:ring-[#E8630A]/50 text-sm transition-all shadow-inner"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-[#E8630A] text-[#F5F0E8] rounded-full hover:bg-[#FFBE0B] disabled:opacity-50 disabled:hover:bg-[#E8630A] transition-colors"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 p-2.5 bg-gradient-to-r from-[#E8630A] to-[#FF8C42] text-white rounded-full hover:shadow-[0_0_15px_rgba(232,99,10,0.5)] hover:scale-105 disabled:opacity-0 disabled:scale-90 transition-all duration-300"
               >
-                <Send size={14} />
+                <Send size={16} className="ml-0.5" />
               </button>
             </form>
           </div>
@@ -155,9 +167,9 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-[#E8630A] hover:bg-[#FFBE0B] text-[#F5F0E8] p-4 rounded-full shadow-xl hover:shadow-[#FFBE0B]/20 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
+          className="bg-gradient-to-br from-[#E8630A] to-[#FF8C42] hover:shadow-[0_0_30px_rgba(232,99,10,0.4)] text-white p-4 sm:p-5 rounded-full shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group ring-4 ring-[#1C2B3A]/50"
         >
-          <MessageSquare size={24} className="group-hover:scale-110 transition-transform" />
+          <MessageSquare size={24} className="group-hover:scale-110 transition-transform duration-300" />
         </button>
       )}
     </div>
