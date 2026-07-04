@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { ThemeToggle } from "./ThemeToggle";
+import TimeWidget from "./TimeWidget";
 
 /**
  * Header Component
@@ -21,18 +23,28 @@ export default function Header() {
         <div className="font-mono text-lg font-bold tracking-tight text-forge-fg">
           jezreal<span className="text-forge-accent">.dev</span>
         </div>
-        {/* Navigation Menu */}
-        <nav className="flex items-center gap-6 font-mono text-sm">
-          <a href="#work" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
-            Work
-          </a>
-          <a href="#skills" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
-            Skills
-          </a>
-          <a href="#newsletter" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
-            Newsletter
-          </a>
-        </nav>
+        
+        {/* Right Side: Nav & Utilities */}
+        <div className="flex items-center gap-4 sm:gap-6">
+          <nav className="hidden sm:flex items-center gap-6 font-mono text-sm">
+            <a href="#work" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
+              Work
+            </a>
+            <a href="#skills" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
+              Skills
+            </a>
+            <a href="#newsletter" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
+              Newsletter
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-3 sm:border-l sm:border-forge-fg/10 sm:pl-6">
+            <div className="hidden md:block">
+              <TimeWidget />
+            </div>
+            <ThemeToggle />
+          </div>
+        </div>
       </div>
     </header>
   );

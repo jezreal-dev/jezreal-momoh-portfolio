@@ -52,7 +52,6 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
@@ -65,7 +64,6 @@ export default function RootLayout({
       <body className="antialiased min-h-screen flex flex-col justify-between">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
-          <ThemeToggle />
           <main className="flex-grow">
             {children}
           </main>
