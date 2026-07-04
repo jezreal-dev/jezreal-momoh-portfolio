@@ -14,8 +14,9 @@ export default function TimeWidget() {
     // Initial Time Set
     const updateTime = () => {
       const now = new Date();
+      const dateString = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
       const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      setTime(timeString);
+      setTime(`${dateString} • ${timeString}`);
     };
     updateTime();
 
