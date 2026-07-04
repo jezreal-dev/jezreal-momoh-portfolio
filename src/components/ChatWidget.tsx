@@ -23,20 +23,17 @@ export default function ChatWidget() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isOpen]);
 
-  const handleSend = async (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const sendMessage = async (textToSend: string) => {
+    if (!textToSend.trim() || isLoading) return;
 
-    const userMessage = input.trim();
-    setMessages((prev) => [...prev, { role: "user", text: userMessage }]);
-    setInput("");
+    setMessages((prev) => [...prev, { role: "user", text: textToSend }]);
     setIsLoading(true);
 
     try {
       const response = await fetch(proxyUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ message: textToSend }),
       });
 
       if (!response.ok) {
@@ -58,17 +55,24 @@ export default function ChatWidget() {
 
     } catch (error) {
       console.error(error);
-      // Graceful offline fallback since we don't have a live URL yet
+      // Graceful offline fallback
       setMessages((prev) => [
         ...prev, 
         { 
           role: "bot", 
-          text: "My secure backend (L2E-Shield) is currently offline while we provision new cloud infrastructure! Please reach out to Jezreal directly at jezreelmomoh1234@gmail.com." 
+          text: "I am currently experiencing high traffic or a network error. Please reach out to Jezreal directly at jezreelmomoh1234@gmail.com." 
         }
       ]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSend = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const text = input;
+    setInput("");
+    await sendMessage(text);
   };
 
   return (
@@ -96,6 +100,23 @@ export default function ChatWidget() {
                 </div>
               </div>
             ))}
+
+            {/* FAQ Quick Replies */}
+            {messages.length === 1 && !isLoading && (
+              <div className="flex flex-col gap-2 mt-2 items-start pl-2">
+                <p className="text-xs text-[#F5F0E8]/50 uppercase tracking-wider font-bold mb-1">Frequently Asked</p>
+                {["What is your tech stack?", "How did you build this site?", "What does L2E Shield do?"].map((faq, i) => (
+                  <button
+                    key={i}
+                    onClick={() => sendMessage(faq)}
+                    className="text-xs bg-[#0D0D0D] border border-[#E8630A]/30 text-[#F5F0E8]/80 px-3 py-2 rounded-full hover:bg-[#E8630A]/20 transition-colors text-left shadow-sm"
+                  >
+                    {faq}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-[#0D0D0D] p-3 rounded-2xl rounded-bl-none border border-[#F5F0E8]/10 flex gap-2 items-center">

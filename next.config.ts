@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed output: "export" to enable Next.js Serverless API routes
   images: {
     unoptimized: true,
   },
