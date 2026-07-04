@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: "AI & Software Full-Stack Engineer building in public from Nigeria. Founder of EduPilot.",
 };
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,6 +36,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <ChatWidget />
+        <SpeedInsights />
       </body>
     </html>
   );
