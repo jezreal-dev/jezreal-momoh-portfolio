@@ -16,8 +16,38 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jezreal-momoh.vercel.app'),
   title: "Jezreal Momoh | AI & Software Full-Stack Engineer",
   description: "AI & Software Full-Stack Engineer building in public from Nigeria. Founder of EduPilot.",
+  keywords: ["Jezreal Momoh", "Jezreal", "Software Engineer", "Full-Stack Engineer", "AI Engineer", "Next.js", "Go", "React", "Developer", "Nigeria", "EduPilot"],
+  authors: [{ name: "Jezreal Momoh", url: "https://jezreal-momoh.vercel.app" }],
+  creator: "Jezreal Momoh",
+  openGraph: {
+    title: "Jezreal Momoh | AI & Software Full-Stack Engineer",
+    description: "AI & Software Full-Stack Engineer building in public from Nigeria. Founder of EduPilot.",
+    url: 'https://jezreal-momoh.vercel.app',
+    siteName: 'Jezreal Momoh Portfolio',
+    images: [
+      {
+        url: '/og-image.png', // Fallback, doesn't exist yet but good practice
+        width: 1200,
+        height: 630,
+        alt: 'Jezreal Momoh - Software Engineer',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Jezreal Momoh | AI & Software Full-Stack Engineer",
+    description: "AI & Software Full-Stack Engineer building in public from Nigeria. Founder of EduPilot.",
+    creator: '@jezrealmomoh', // Assuming, can be updated later
+    images: ['/og-image.png'],
+  },
+  alternates: {
+    canonical: 'https://jezreal-momoh.vercel.app',
+  },
 };
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
