@@ -16,16 +16,16 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jezreal-momoh.vercel.app'),
+  metadataBase: new URL('https://jezrealmomoh.vercel.app'),
   title: "Jezreal Momoh | AI & Software Full-Stack Engineer",
   description: "AI & Software Full-Stack Engineer building in public from Nigeria. Founder of EduPilot.",
   keywords: ["Jezreal Momoh", "Jezreal", "Software Engineer", "Full-Stack Engineer", "AI Engineer", "Next.js", "Go", "React", "Developer", "Nigeria", "EduPilot"],
-  authors: [{ name: "Jezreal Momoh", url: "https://jezreal-momoh.vercel.app" }],
+  authors: [{ name: "Jezreal Momoh", url: "https://jezrealmomoh.vercel.app" }],
   creator: "Jezreal Momoh",
   openGraph: {
     title: "Jezreal Momoh | AI & Software Full-Stack Engineer",
     description: "AI & Software Full-Stack Engineer building in public from Nigeria. Founder of EduPilot.",
-    url: 'https://jezreal-momoh.vercel.app',
+    url: 'https://jezrealmomoh.vercel.app',
     siteName: 'Jezreal Momoh Portfolio',
     images: [
       {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   alternates: {
-    canonical: 'https://jezreal-momoh.vercel.app',
+    canonical: 'https://jezrealmomoh.vercel.app',
   },
 };
 
