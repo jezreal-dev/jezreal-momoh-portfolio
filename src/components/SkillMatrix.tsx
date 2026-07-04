@@ -103,6 +103,27 @@ export default function SkillMatrix() {
           </p>
         </motion.div>
 
+        {/* Project Management Section (Spans 12 cols - Full Width) */}
+        <motion.div 
+          variants={itemVariants}
+          className="md:col-span-12 relative overflow-hidden border border-[#FFBE0B]/20 bg-gradient-to-r from-forge-card/60 to-[#FFBE0B]/5 backdrop-blur-xl p-8 md:p-10 rounded-2xl shadow-lg hover:shadow-xl hover:border-[#FFBE0B]/40 transition-all duration-300 group flex flex-col md:flex-row gap-8 items-center justify-between"
+        >
+          <div className="flex-1">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#FFBE0B] to-[#E8630A] flex items-center justify-center shadow-inner" />
+              <h3 className="text-forge-fg font-bold font-sans text-2xl group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FFBE0B] group-hover:to-[#E8630A] transition-colors">Project Management & Leadership</h3>
+            </div>
+            <p className="text-lg font-sans text-forge-fg/80 leading-relaxed font-medium">
+              Formally trained in Project Management to effectively lead engineering teams, optimize agile delivery pipelines, and ensure technical roadmaps align strictly with business objectives and timelines.
+            </p>
+          </div>
+          <div className="hidden md:flex flex-col items-center justify-center w-32 h-32 rounded-full border-[4px] border-[#FFBE0B]/20 bg-[#0D0D0D]/50 shadow-inner shrink-0 relative">
+            <div className="absolute inset-0 rounded-full border-[4px] border-[#FFBE0B] border-t-transparent animate-[spin_4s_linear_infinite] opacity-50" />
+            <span className="font-bold text-[#FFBE0B] font-mono text-xl">100%</span>
+            <span className="text-[9px] uppercase tracking-widest text-forge-fg/50 font-bold mt-1">Certified</span>
+          </div>
+        </motion.div>
+
       </motion.div>
     </section>
   );

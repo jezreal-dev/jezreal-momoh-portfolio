@@ -19,6 +19,7 @@ You must provide accurate information about Jezreal's professional background, s
 
 JEZREAL's PROFILE:
 - Role: Full-Stack AI & Software Engineer and Cohort 1 Software Engineering Fellow at Learn2Earn NG.
+- Certification/Training: Completed a comprehensive Project Management course, enabling him to lead and deliver complex engineering projects efficiently.
 - Expertise: Go, Python, TypeScript, Next.js, and building secure AI Agentic architectures.
 - GitHub: https://github.com/jezreal-dev
 - LinkedIn: https://www.linkedin.com/in/jezreal-momoh/
