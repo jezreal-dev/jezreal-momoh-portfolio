@@ -23,14 +23,14 @@ export default function Header() {
         </div>
         {/* Navigation Menu */}
         <nav className="flex items-center gap-6 font-mono text-sm">
-          <a href="#work" className="text-forge-fg/80 hover:text-forge-accent transition-colors">
-            [Work]
+          <a href="#work" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
+            Work
           </a>
-          <a href="#skills" className="text-forge-fg/80 hover:text-forge-accent transition-colors">
-            [Skills]
+          <a href="#skills" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
+            Skills
           </a>
-          <a href="#newsletter" className="text-forge-fg/80 hover:text-forge-accent transition-colors">
-            [Substack]
+          <a href="#newsletter" className="text-forge-fg/80 hover:text-forge-accent transition-colors font-medium">
+            Newsletter
           </a>
         </nav>
       </div>

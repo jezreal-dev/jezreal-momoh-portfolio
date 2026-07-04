@@ -55,8 +55,8 @@ export default function Footer() {
           </a>
         </div>
         {/* MX Indicator */}
-        <div className="text-[10px] text-forge-accent">
-          [MX-Optimized Schema Embedded]
+        <div className="text-[10px] font-medium text-forge-accent uppercase tracking-widest">
+          MX-Optimized Schema Embedded
         </div>
         {/* JSON-LD Script Injection */}
         <script

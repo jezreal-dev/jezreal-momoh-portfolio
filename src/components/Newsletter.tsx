@@ -31,12 +31,12 @@ import React from "react";
 export default function Newsletter() {
   return (
     <section id="newsletter" className="mx-auto max-w-6xl px-6 py-16 scroll-mt-24">
-      <div className="border border-forge-fg/15 bg-forge-card p-8 rounded-lg text-center font-mono">
-        <span className="text-xs uppercase tracking-widest text-forge-accent">[Weekly Reflections]</span>
+      <div className="border border-forge-fg/5 bg-forge-card p-10 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center font-sans">
+        <span className="text-sm font-semibold uppercase tracking-widest text-forge-accent">Weekly Reflections</span>
         <h2 className="mt-3 font-sans text-2xl md:text-3xl font-bold tracking-tight text-forge-fg">
           BUILDING IN PUBLIC NEWSLETTER
         </h2>
-          <p className="mt-4 text-sm text-forge-fg/80 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-4 text-base font-medium text-forge-fg/80 max-w-lg mx-auto leading-relaxed">
           I write a weekly Sunday newsletter sharing raw engineering logs, lesson plans, and full-stack strategies.
         </p>
         <form
