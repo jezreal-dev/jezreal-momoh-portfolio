@@ -17,4 +17,30 @@
     color: var(--color-forge-fg);
     font-family: var(--font-sans);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-forge-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-forge-card);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-forge-accent);
+  }
 }

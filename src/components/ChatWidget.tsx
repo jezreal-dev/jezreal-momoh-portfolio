@@ -11,7 +11,7 @@ type Message = {
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "bot", text: "Hi there! I am L2E-Shield, Jezreal's AI proxy. How can I help you today?" }
+    { role: "bot", text: "Hi there! I am L2E-Shield, Jezreal's AI proxy. I'm currently running in limited mode, but how can I help you today?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -60,30 +60,37 @@ export default function ChatWidget() {
 
     } catch (error) {
       console.error(error);
-      setMessages((prev) => [...prev, { role: "bot", text: "Network error. Please make sure the proxy is running." }]);
+      // Graceful offline fallback since we don't have a live URL yet
+      setMessages((prev) => [
+        ...prev, 
+        { 
+          role: "bot", 
+          text: "My secure backend (L2E-Shield) is currently offline while we provision new cloud infrastructure! Please reach out to Jezreal directly at jezreelmomoh1234@gmail.com." 
+        }
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 font-sans flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-80 sm:w-96 bg-[#1C2B3A] border border-[#F5F0E8]/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right">
+        <div className="mb-4 w-[calc(100vw-2rem)] sm:w-96 h-[60vh] sm:h-[500px] max-h-[800px] bg-[#1C2B3A] border border-[#F5F0E8]/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 transform origin-bottom-right">
           {/* Header */}
-          <div className="bg-[#0D0D0D] p-4 flex justify-between items-center border-b border-[#F5F0E8]/10">
+          <div className="bg-[#0D0D0D] p-4 flex justify-between items-center border-b border-[#F5F0E8]/10 shrink-0">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-[#FFBE0B] rounded-full animate-pulse"></div>
-              <h3 className="text-[#F5F0E8] font-bold">Jezreal's AI Assistant</h3>
+              <h3 className="text-[#F5F0E8] font-bold">Jezreal&apos;s AI Assistant</h3>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-[#F5F0E8]/70 hover:text-[#FFBE0B] transition-colors">
+            <button onClick={() => setIsOpen(false)} className="text-[#F5F0E8]/70 hover:text-[#FFBE0B] transition-colors p-1">
               <X size={20} />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="h-96 overflow-y-auto p-4 flex flex-col gap-4 bg-[#1C2B3A]">
+          <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-[#1C2B3A]">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${msg.role === "user" ? "bg-[#E8630A] text-[#F5F0E8] rounded-br-none" : "bg-[#0D0D0D] text-[#F5F0E8] border border-[#F5F0E8]/10 rounded-bl-none"}`}>
@@ -103,7 +110,7 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <div className="p-3 bg-[#0D0D0D] border-t border-[#F5F0E8]/10">
+          <div className="p-3 bg-[#0D0D0D] border-t border-[#F5F0E8]/10 shrink-0">
             <form onSubmit={handleSend} className="flex items-center gap-2 relative">
               <input
                 type="text"

@@ -49,7 +49,7 @@ export default function SkillMatrix() {
 
       {/* Integration Highlight Callout */}
       <div className="mt-6 border border-forge-accent/20 bg-forge-accent/5 p-6 rounded-lg font-mono text-xs md:text-sm text-forge-fg/90 flex flex-col gap-2">
-        <span className="text-forge-accent font-bold">// KEY ENGINEERING LINKAGE</span>
+        <span className="text-forge-accent font-bold">{"//"} KEY ENGINEERING LINKAGE</span>
         <p>
           I write Python code for advanced LLM reasoning tasks and parser agents, linked to a performant Go API gateway designed for high-concurrency connections.
         </p>

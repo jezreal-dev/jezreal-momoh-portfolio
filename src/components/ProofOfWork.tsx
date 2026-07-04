@@ -82,7 +82,7 @@ export default function ProofOfWork() {
               {/* Project Card Header */}
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-forge-fg/10 pb-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-sm text-forge-accent">{project.id} //</span>
+                  <span className="font-mono text-sm text-forge-accent">{project.id} {"//"}</span>
                   <h3 className="font-sans text-xl font-bold text-forge-fg">{project.title}</h3>
                 </div>
                 {project.badge && (
