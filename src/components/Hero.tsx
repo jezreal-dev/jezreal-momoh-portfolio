@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope, FaBriefcase } from "react-icons/fa6";
 
 /**
  * Hero Component
@@ -31,12 +32,21 @@ export default function Hero() {
              I am Jezreal Momoh, an AI & Software Full-Stack Engineer and Cohort 1 Software Engineering Fellow at Learn2Earn NG. I build secure agentic architectures and fast, user-centric interfaces.
           </p>
           {/* Call to Actions */}
-          <div className="mt-8 flex flex-wrap gap-4 font-mono text-sm">
-            <a href="https://github.com/jezrealdev" target="_blank" rel="noopener noreferrer" className="border border-forge-accent px-5 py-2 hover:bg-forge-accent hover:text-forge-bg transition-colors">
-              [GitHub Profile]
+          <div className="mt-8 flex flex-wrap gap-3 font-sans text-sm">
+            <a href="https://github.com/jezreal-dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-forge-fg/20 bg-forge-card px-4 py-2 hover:border-forge-accent hover:text-forge-accent transition-colors rounded-md">
+              <FaGithub size={16} /> GitHub
             </a>
-            <a href="https://linkedin.com/in/jezreal-momoh" target="_blank" rel="noopener noreferrer" className="border border-forge-fg/20 px-5 py-2 hover:border-forge-fg transition-colors">
-              [LinkedIn]
+            <a href="https://www.linkedin.com/in/jezreal-momoh/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-forge-fg/20 bg-forge-card px-4 py-2 hover:border-[#0A66C2] hover:text-[#0A66C2] transition-colors rounded-md">
+              <FaLinkedin size={16} /> LinkedIn
+            </a>
+            <a href="https://x.com/laerzej_m" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-forge-fg/20 bg-forge-card px-4 py-2 hover:border-forge-fg hover:text-white transition-colors rounded-md">
+              <FaXTwitter size={16} /> Twitter/X
+            </a>
+            <a href="mailto:jezreelmomoh1234@gmail.com" className="flex items-center gap-2 border border-forge-fg/20 bg-forge-card px-4 py-2 hover:border-[#EA4335] hover:text-[#EA4335] transition-colors rounded-md">
+              <FaEnvelope size={16} /> Personal
+            </a>
+            <a href="mailto:jezreelglobal@gmail.com" className="flex items-center gap-2 border border-forge-fg/20 bg-forge-card px-4 py-2 hover:border-[#EA4335] hover:text-[#EA4335] transition-colors rounded-md">
+              <FaBriefcase size={16} /> Work
             </a>
           </div>
         </div>
