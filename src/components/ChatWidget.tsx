@@ -17,7 +17,7 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const proxyUrl = process.env.NEXT_PUBLIC_PROXY_URL || "http://localhost:8080/v1/chat";
+  const proxyUrl = "/api/chat";
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,18 +36,16 @@ export default function ChatWidget() {
       const response = await fetch(proxyUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: userMessage }] }]
-        }),
+        body: JSON.stringify({ message: userMessage }),
       });
 
       if (!response.ok) {
         let errorText = "An error occurred. Please try again.";
         if (response.status === 429) {
           errorText = "Whoa there! You are sending messages too fast. Please slow down.";
-        } else if (response.status === 400) {
+        } else if (response.status === 400 || response.status === 500) {
           const errData = await response.json().catch(() => ({}));
-          errorText = errData.error || "Bad request or malicious payload blocked by proxy.";
+          errorText = errData.error || "An error occurred. Please try again later.";
         }
         setMessages((prev) => [...prev, { role: "bot", text: errorText }]);
         setIsLoading(false);
@@ -55,7 +53,7 @@ export default function ChatWidget() {
       }
 
       const data = await response.json();
-      const botResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+      const botResponse = data?.text || "No response received.";
       setMessages((prev) => [...prev, { role: "bot", text: botResponse }]);
 
     } catch (error) {

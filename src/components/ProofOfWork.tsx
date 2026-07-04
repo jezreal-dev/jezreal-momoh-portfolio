@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion, Variants } from "framer-motion";
 
 const projects = [
   {
@@ -44,65 +47,105 @@ const projects = [
 ];
 
 export default function ProofOfWork() {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+  };
+
   return (
-    <section id="work" className="mx-auto max-w-6xl px-6 py-16 scroll-mt-24">
-      <div className="mb-12">
-        <span className="font-sans text-sm font-semibold uppercase tracking-widest text-forge-accent">Featured Projects</span>
-        <h2 className="mt-2 font-sans text-3xl md:text-4xl font-bold tracking-tight text-forge-fg">
+    <section id="work" className="mx-auto max-w-6xl px-6 py-24 scroll-mt-24 relative">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="mb-16 text-center"
+      >
+        <span className="font-sans text-sm font-bold uppercase tracking-[0.2em] text-forge-accent bg-forge-accent/10 px-4 py-1.5 rounded-full border border-forge-accent/20">Featured Projects</span>
+        <h2 className="mt-6 font-sans text-4xl md:text-5xl font-extrabold tracking-tight text-forge-fg">
           SHIPPED CODE & LIVE SYSTEMS
         </h2>
-      </div>
+      </motion.div>
       
       {/* Projects Grid */}
-      <div className="flex flex-col gap-10">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="flex flex-col gap-10"
+      >
         {projects.map((project) => (
-          <div key={project.id} className="relative border border-forge-fg/10 bg-forge-card p-6 md:p-10 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+          <motion.div 
+            key={project.id} 
+            variants={itemVariants}
+            whileHover={{ y: -8, scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="relative overflow-hidden border border-forge-fg/10 bg-forge-card/60 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-forge-accent/10 hover:border-forge-accent/40 transition-all duration-300 group"
+          >
+            {/* Ambient hover glow inside card */}
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-forge-accent/5 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10" />
+
             {/* Project Card Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-forge-fg/10 pb-6 mb-6">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-forge-fg/10 pb-6 mb-8">
               <div className="flex items-center gap-4">
-                <span className="font-mono text-sm font-medium text-forge-accent bg-forge-accent/10 px-3 py-1 rounded-full">{project.id}</span>
-                <h3 className="font-sans text-2xl font-bold text-forge-fg">{project.title}</h3>
+                <span className="font-sans text-lg font-bold text-forge-bg bg-forge-accent px-3 py-1 rounded-full shadow-inner">{project.id}</span>
+                <h3 className="font-sans text-3xl font-extrabold text-forge-fg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-forge-fg group-hover:to-forge-accent transition-colors duration-300">{project.title}</h3>
               </div>
               {project.badge && (
-                <span className="font-sans font-medium text-xs bg-forge-accent/10 text-forge-accent px-3 py-1 rounded-full">
+                <span className="font-sans font-bold text-xs uppercase tracking-wider bg-forge-accent/10 text-forge-accent px-4 py-1.5 rounded-full border border-forge-accent/20">
                   {project.badge}
                 </span>
               )}
             </div>
+            
             {/* Project Problem & Solution Statements */}
-            <div className="space-y-4 font-sans text-base text-forge-fg/90">
+            <div className="space-y-6 font-sans text-lg text-forge-fg/80 font-medium">
               <p>
-                <span className="text-forge-accent font-semibold">PROBLEM:</span> {project.problem}
+                <span className="text-forge-accent font-bold uppercase tracking-wider text-sm block mb-1">Problem</span> 
+                {project.problem}
               </p>
               <p>
-                <span className="text-forge-accent font-semibold">SOLUTION:</span> {project.solution}
+                <span className="text-forge-accent font-bold uppercase tracking-wider text-sm block mb-1">Solution</span> 
+                {project.solution}
               </p>
             </div>
+            
             {/* Project Footer: Tech Stack & Links */}
-            <div className="mt-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="mt-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
               {/* Tech Stack Array */}
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
-                  <span key={tech} className="bg-forge-bg border border-forge-fg/10 px-2 py-1 text-xs text-forge-fg/70 rounded">
+                  <span key={tech} className="bg-forge-bg border border-forge-fg/10 px-3 py-1.5 text-sm font-semibold text-forge-fg/80 rounded-md">
                     {tech}
                   </span>
                 ))}
               </div>
               {/* Project Links */}
-              <div className="flex gap-4 pt-4 md:pt-0 text-sm font-medium">
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-forge-accent hover:underline">
-                  GitHub Repository
+              <div className="flex gap-6 pt-4 md:pt-0 text-base font-bold">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-forge-fg hover:text-forge-accent flex items-center gap-2 transition-colors">
+                  View Source
                 </a>
                 {project.live && (
-                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-forge-fg/60 hover:text-forge-fg hover:underline">
-                    Live Site
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-forge-fg hover:text-forge-accent flex items-center gap-2 transition-colors">
+                    Live Demo
                   </a>
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
