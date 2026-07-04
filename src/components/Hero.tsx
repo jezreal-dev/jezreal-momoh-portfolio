@@ -54,14 +54,13 @@ export default function Hero() {
         <div className="relative group">
           {/* Animated Offset Circle Outline */}
           <div className="absolute -bottom-3 -right-3 h-48 w-48 rounded-full border-2 border-forge-accent bg-transparent transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1" />
-          {/* Avatar Image Frame */}
           <div className="relative overflow-hidden h-48 w-48 rounded-full border border-forge-fg/10 bg-forge-card flex items-center justify-center">
             <Image
-              src="/images/headshot-placeholder.svg"
+              src="/images/jezreal-momoh.png"
               alt="Jezreal Momoh"
               width={200}
               height={200}
-              className="object-cover"
+              className="object-cover h-full w-full"
               priority
             />
           </div>
