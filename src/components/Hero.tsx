@@ -60,8 +60,8 @@ export default function Hero() {
             <a href="https://www.linkedin.com/in/jezreal-momoh/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-forge-fg/10 bg-forge-card px-5 py-2.5 hover:border-[#0A66C2] hover:text-[#0A66C2] transition-all duration-300 rounded-lg shadow-sm hover:shadow-md hover:-translate-y-0.5">
               <FaLinkedin size={16} /> LinkedIn
             </a>
-            <a href="https://x.com/laerzej_m" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-forge-fg/10 bg-forge-card px-5 py-2.5 hover:border-forge-fg hover:text-white transition-all duration-300 rounded-lg shadow-sm hover:shadow-md hover:-translate-y-0.5">
-              <FaXTwitter size={16} /> Twitter/X
+            <a href="https://x.com/jezreal_dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border border-forge-fg/10 bg-forge-card px-5 py-2.5 hover:border-forge-fg hover:text-white transition-all duration-300 rounded-lg shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <FaXTwitter size={16} /> X
             </a>
             <a href="mailto:jezreelmomoh1234@gmail.com" className="flex items-center gap-2 border border-forge-fg/10 bg-forge-card px-5 py-2.5 hover:border-[#EA4335] hover:text-[#EA4335] transition-all duration-300 rounded-lg shadow-sm hover:shadow-md hover:-translate-y-0.5">
               <FaEnvelope size={16} /> Personal

@@ -23,7 +23,7 @@ JEZREAL's PROFILE:
 - Expertise: Go, Python, TypeScript, Next.js, and building secure AI Agentic architectures.
 - GitHub: https://github.com/jezreal-dev
 - LinkedIn: https://www.linkedin.com/in/jezreal-momoh/
-- X/Twitter: https://x.com/laerzej_m
+- X: https://x.com/jezreal_dev
 - Email: jezreelmomoh1234@gmail.com (Personal) or jezreelglobal@gmail.com (Work)
 
 RULES:

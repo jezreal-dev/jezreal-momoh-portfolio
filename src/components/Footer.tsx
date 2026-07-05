@@ -25,7 +25,7 @@ export default function Footer() {
     "sameAs": [
       "https://github.com/jezreal-dev",
       "https://www.linkedin.com/in/jezreal-momoh/",
-      "https://x.com/laerzej_m"
+      "https://x.com/jezreal_dev"
     ]
   };
 
@@ -44,7 +44,7 @@ export default function Footer() {
           <a href="https://www.linkedin.com/in/jezreal-momoh/" target="_blank" rel="noopener noreferrer" className="hover:text-[#0A66C2]" aria-label="LinkedIn">
             <FaLinkedin />
           </a>
-          <a href="https://x.com/laerzej_m" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Twitter/X">
+          <a href="https://x.com/jezreal_dev" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="X">
             <FaXTwitter />
           </a>
           <a href="mailto:jezreelmomoh1234@gmail.com" className="hover:text-[#EA4335]" aria-label="Personal Email">
